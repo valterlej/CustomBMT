@@ -1,4 +1,4 @@
-# Disclaimer
+# Alert
 
 This is an implementation of the BMT method with some customizations. 
 

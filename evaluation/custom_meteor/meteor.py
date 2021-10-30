@@ -14,10 +14,9 @@ METEOR_JAR = 'meteor-1.5.jar'
 
 class Meteor:
 
-    def __init__(self, use_comma=False):        
+    def __init__(self):        
         d = dict(os.environ.copy()) # https://github.com/tylin/coco-caption/issues/6
         d['LANG'] = 'C'
-        self.use_comma = use_comma
         self.meteor_cmd = ['java', '-jar', '-Xmx2G', METEOR_JAR, \
                 '-', '-', '-stdio', '-l', 'en', '-norm']
         self.meteor_p = subprocess.Popen(self.meteor_cmd, \
@@ -38,8 +37,8 @@ class Meteor:
         for i in imgIds:
             assert(len(res[i]) == 1)
             stat = self._stat(res[i][0], gts[i])
-            if self.use_comma:
-                stat = stat.replace(".",",")
+            # when running in diolkos
+            #stat = stat.replace(".",",")
             eval_line += ' ||| {}'.format(stat)
 
 

@@ -11,13 +11,12 @@ from datasets.load_features import load_features_from_npy
 from utilities.captioning_utils import HiddenPrints, get_lr
 
 def calculate_metrics(
-    reference_paths, submission_path, tIoUs, max_prop_per_vid, verbose=True, only_proposals=False, use_comma=False
-):
+    reference_paths, submission_path, tIoUs, max_prop_per_vid, verbose=True, only_proposals=False):
     metrics = {}
     PREDICTION_FIELDS = ['results', 'version', 'external_data']
     evaluator = ANETcaptions(
         reference_paths, submission_path, tIoUs, 
-        max_prop_per_vid, PREDICTION_FIELDS, verbose, only_proposals, use_comma)
+        max_prop_per_vid, PREDICTION_FIELDS, verbose, only_proposals)
     evaluator.evaluate()
     
     for i, tiou in enumerate(tIoUs):
@@ -274,7 +273,7 @@ def validation_1by1_loop(cfg, model, loader, decoder, epoch, TBoard):
         ## RUN THE EVALUATION
         # blocks the printing
         with HiddenPrints():
-            val_metrics = calculate_metrics(reference_paths, submission_path, tIoUs, cfg.max_prop_per_vid, use_comma=cfg.use_comma)
+            val_metrics = calculate_metrics(reference_paths, submission_path, tIoUs, cfg.max_prop_per_vid)
 
         if phase == 'learned_props':
             print(submission_path)

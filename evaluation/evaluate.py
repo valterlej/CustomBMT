@@ -16,7 +16,7 @@ sys.path.insert(0, './submodules/')
 
 from pycocoevalcap.tokenizer.ptbtokenizer import PTBTokenizer
 from pycocoevalcap.bleu.bleu import Bleu
-from evaluation.custom_meteor.meteor import Meteor
+from pycocoevalcap.meteor.meteor import Meteor
 from pycocoevalcap.rouge.rouge import Rouge
 from pycocoevalcap.cider.cider import Cider
 import numpy as np
@@ -33,7 +33,7 @@ class ANETcaptions(object):
 
     def __init__(self, ground_truth_filenames=None, prediction_filename=None,
                  tious=None, max_proposals=1000,
-                 prediction_fields=PREDICTION_FIELDS, verbose=False, only_proposals=False, use_comma=False):
+                 prediction_fields=PREDICTION_FIELDS, verbose=False, only_proposals=False):
         # Check that the gt and submission files exist and load them
         if len(tious) == 0:
             raise IOError('Please input a valid tIoU.')
@@ -58,7 +58,7 @@ class ANETcaptions(object):
         else:
             self.scorers = [
                 (Bleu(4), ["Bleu_1", "Bleu_2", "Bleu_3", "Bleu_4"]),
-                (Meteor(use_comma), "METEOR"),
+                (Meteor(), "METEOR"),
                 (Rouge(), "ROUGE_L"),
                 (Cider(), "CIDEr")
             ]
@@ -267,8 +267,7 @@ def main(args):
                              prediction_filename=args.submission,
                              tious=args.tious,
                              max_proposals=args.max_proposals_per_video,
-                             verbose=args.verbose,
-                             use_comma=False)
+                             verbose=args.verbose)
     evaluator.evaluate()
 
     # Output the results
@@ -300,8 +299,6 @@ if __name__=='__main__':
     parser.add_argument('-ppv', '--max-proposals-per-video', type=int, default=1000,
                         help='maximum propoasls per video.')
     parser.add_argument('-v', '--verbose', action='store_true',
-                        help='Print intermediate steps.')
-    parser.add_argument('-u', '--use_comma', action='store_true', default=False,
                         help='Print intermediate steps.')
     args = parser.parse_args()
 

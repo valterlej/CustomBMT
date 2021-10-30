@@ -161,8 +161,6 @@ if __name__ == "__main__":
                         help='intermediate layer dims in proposal gen heads')
     parser.add_argument('--layer_norm', dest='layer_norm', action='store_true', default=False, 
                         help='whether to use layer norm in proposal generation heads')
-    parser.add_argument('--use_comma', dest='use_comma', action='store_true', default=False, 
-                        help='use comma in the meteor script')
 
 
     ## DEBUGGING
@@ -184,3 +182,8 @@ if __name__ == "__main__":
         pass
     else:
         main(cfg)
+
+# diolkos
+
+# BMT_(i3D)_(Sm)
+#python main.py --modality audio_video --video_features_path ~/datasets/i3d_acnet --audio_features_path ~/datasets/embeddings/acnet_sk24_sp24/visglove_acnet_tr_te_kinetics --d_vid 1024 --d_aud 128 --feature_timespan_in_fps 24 --procedure train_cap --device_ids 0 --max_len 40 --epoch_num 50 --early_stop_after 15 --pad_audio_feats_up_to 300 --model av_transformer --d_model 1024 --d_model_audio 128 --use_comma

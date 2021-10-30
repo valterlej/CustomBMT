@@ -31,7 +31,6 @@ class Config(object):
         self.pad_token = args.pad_token
         self.max_len = args.max_len
         self.min_freq_caps = args.min_freq_caps
-        self.use_comma = args.use_comma
 
         # model
         if args.procedure == 'train_cap':

@@ -7,7 +7,7 @@ The original implementation and running instructions are in [BMT](https://github
 # Clonning
 
 ```shell
-git clone --recursive https://github.com/v-iashin/BMT.git
+git clone --recursive https://github.com/valterlej/CustomBMT.git
 conda env create -f ./conda_env.yml
 conda activate bmt
 # install spacy language model. Make sure you activated the conda environment

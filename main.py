@@ -174,7 +174,7 @@ if __name__ == "__main__":
     parser.set_defaults(to_log=True)
 
     args = parser.parse_args()
-    pprint(vars(args))
+    pprint(vars(args))    
     cfg = Config(args)
 
     if args.debug:
